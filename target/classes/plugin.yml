@@ -1,0 +1,26 @@
+# OgiPlayerStats/src/main/resources/plugin.yml
+
+name: OgiPlayerStats
+version: 1.0.0
+main: org.ognjen.ogiPlayerStats.OgiPlayerStats
+api-version: '1.21'
+author: ogi
+description: A simple and configurable player stats plugin.
+softdepend: [PlaceholderAPI]
+commands:
+  stats:
+    description: Shows player statistics or reloads the config.
+    usage: "/stats [player] | /stats reload"
+    permission: ogiplayerstats.view
+    aliases: [stat]
+permissions:
+  ogiplayerstats.view:
+    description: Allows viewing your own stats.
+    default: true
+  ogiplayerstats.view.others:
+    description: Allows viewing other players' stats.
+    default: op
+  # Add this new permission for the reload command
+  ogiplayerstats.reload:
+    description: Allows reloading the plugin configuration.
+    default: op

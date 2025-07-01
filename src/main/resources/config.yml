@@ -1,0 +1,82 @@
+# ---------------------------------- #
+#    OgiPlayerStats Configuration    #
+# ---------------------------------- #
+
+# Message settings (for errors, etc.)
+messages:
+  no-permission: "&cYou do not have permission to use this command."
+  player-not-found: "&cPlayer '{player}' not found."
+
+# --- GUI Settings ---
+gui-settings:
+  # The title of the stats inventory. Use color codes with '&'.
+  # You can use {player} as a placeholder for the target's name.
+  title: "&1&lStats for: &9{player}"
+  # Size of the inventory. MUST be a multiple of 9 (e.g., 27, 36, 45, 54).
+  size: 36
+  # Filler item for empty slots in the GUI.
+  filler-item:
+    enabled: true
+    material: "GRAY_STAINED_GLASS_PANE"
+    name: "&r" # An empty name
+
+# --- Displayed Stats ---
+# Each item in this list will be an item in the GUI.
+# You can find Material names here: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+# You can find Statistic names here: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Statistic.html
+# Slots are numbered 0-53 (top-left to bottom-right).
+displayed-stats:
+  - slot: 10
+    material: "DIAMOND_SWORD"
+    name: "&bPlayer Kills"
+    lore:
+      - "&7Total players defeated."
+      - ""
+      - "&aValue: &f{value}"
+    statistic: "PLAYER_KILLS"
+
+  - slot: 11
+    material: "IRON_SWORD"
+    name: "&bMob Kills"
+    lore:
+      - "&7Total mobs slain."
+      - ""
+      - "&aValue: &f{value}"
+    statistic: "MOB_KILLS"
+
+  # --- NEW: PAPI Placeholder Example (Vault Economy) ---
+  - slot: 13
+    material: "GOLD_INGOT"
+    name: "&ePlayer Balance"
+    lore:
+      - "&7Your current balance on the server."
+      - ""
+      - "&aValue: &f{value}"
+    # Use 'placeholder' INSTEAD of 'statistic'.
+    # This requires Vault and an economy plugin.
+    placeholder: "%vault_eco_balance_formatted%"
+
+  - slot: 14
+    material: "DIAMOND_PICKAXE"
+    name: "&bDiamonds Mined"
+    lore:
+      - "&7Diamond ore blocks broken."
+      - ""
+      - "&aValue: &f{value}"
+    statistic: "MINE_BLOCK"
+    type: "BLOCK"
+    sub-type: "DIAMOND_ORE"
+
+  # --- NEW: PAPI Placeholder with a Player Head ---
+  - slot: 15
+    material: "PLAYER_HEAD"
+    # The {player} placeholder here will be replaced with the target player's name.
+    skull-owner: "{player}"
+    name: "&d{player}'s Playtime"
+    lore:
+      - "&7Total time played, tracked by another plugin."
+      - ""
+      - "&ePlaytime: &f{value}"
+    # This could be from EssentialsX (%essentials_playtime_formatted%),
+    # or another playtime plugin.
+    placeholder: "%player_time_formatted%"
