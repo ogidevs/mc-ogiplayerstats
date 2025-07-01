@@ -29,6 +29,15 @@ gui-settings:
 #
 # Slots are numbered 0-53 (top-left to bottom-right).
 displayed-stats:
+  - slot: 4
+    material: "PLAYER_HEAD"
+    skull-owner: "{player}"
+    name: "&b{player}'s Stats"
+    lore:
+      - "&7An overview of your journey."
+      - ""
+      - "&ePlaytime: &f%statistic_time_played%"
+      - "&eJoin Date: &f%player_first_join_date%"
   - slot: 11
     material: "DIAMOND_SWORD"
     name: "&bPlayer Kills"
@@ -94,6 +103,16 @@ displayed-stats:
     # This could be from EssentialsX (%essentials_playtime_formatted%),
     # or another playtime plugin.
     placeholder: "%statistic_time_played%"
+
+  - slot: 22 # Centerpiece PvP Stat
+    material: "WRITABLE_BOOK"
+    name: "&6Kill/Death Ratio (KDR)"
+    lore:
+      - "&7The ultimate PvP metric."
+      - ""
+      - "&eRatio: &f{value}"
+    # This advanced placeholder calculates KDR on the fly!
+    placeholder: ""
 
 # --- Plugin Settings ---
 settings:

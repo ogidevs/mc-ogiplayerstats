@@ -46,6 +46,7 @@ public final class OgiPlayerStats extends JavaPlugin {
         }
         // -------------------------
 
+        versionChecker.check();
         getLogger().info("OgiPlayerStats has been enabled!");
     }
 

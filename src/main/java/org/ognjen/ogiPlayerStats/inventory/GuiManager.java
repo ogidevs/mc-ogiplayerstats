@@ -12,6 +12,7 @@ import org.bukkit.inventory.meta.SkullMeta;
 import org.ognjen.ogiPlayerStats.OgiPlayerStats;
 import org.ognjen.ogiPlayerStats.utils.StatHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -72,24 +73,22 @@ public class GuiManager {
                 .map(map -> plugin.getConfig().createSection("temp", map))
                 .collect(Collectors.toList());
 
-        ConfigurationSection timeSection = plugin.getConfig().getConfigurationSection("time-stat");
-        if (timeSection != null && timeSection.getBoolean("enabled")) {
-            statSections.add(timeSection);
-        }
-
         for (ConfigurationSection section : statSections) {
             try {
                 int slot = section.getInt("slot");
                 Material material = Material.valueOf(section.getString("material", "STONE").toUpperCase());
-                String name = section.getString("name", "&cUnnamed Stat"); // <-- Get raw name first
+                String name = section.getString("name", "&cUnnamed Stat");
                 List<String> lore = section.getStringList("lore");
                 String value;
 
                 if (section.isString("placeholder")) {
                     if (papiEnabled) {
                         String placeholder = section.getString("placeholder");
-                        assert placeholder != null;
-                        value = PlaceholderAPI.setPlaceholders(target.getPlayer(), placeholder);
+                        if (target.isOnline()) {
+                            value = PlaceholderAPI.setPlaceholders(target.getPlayer(), placeholder);
+                        } else {
+                            value = PlaceholderAPI.setPlaceholders(target, placeholder);
+                        }
                     } else {
                         value = "&cPlaceholderAPI not found!";
                     }
@@ -102,17 +101,29 @@ public class GuiManager {
 
                 if (meta != null) {
                     String finalName = name.replace("{player}", target.getName() != null ? target.getName() : "Unknown");
-                    meta.setDisplayName(colorize(finalName)); // <-- Use the processed name
+                    meta.setDisplayName(colorize(finalName));
 
-                    final String finalValue = value;
-                    List<String> finalLore = lore.stream()
-                            .map(line -> colorize(line.replace("{value}", finalValue)))
-                            .collect(Collectors.toList());
-                    meta.setLore(finalLore);
+                    List<String> processedLore = new ArrayList<>();
+                    for (String line : lore) {
+                        // First, replace our special {value} placeholder
+                        String processedLine = line.replace("{value}", value);
+
+                        // Then, if PAPI is enabled, parse any other placeholders in the line
+                        if (papiEnabled) {
+                            if (target.isOnline()) {
+                                processedLine = PlaceholderAPI.setPlaceholders(target.getPlayer(), processedLine);
+                            } else {
+                                processedLine = PlaceholderAPI.setPlaceholders(target, processedLine);
+                            }
+                        }
+
+                        processedLore.add(colorize(processedLine));
+                    }
+                    meta.setLore(processedLore);
 
                     if (meta instanceof SkullMeta && section.isString("skull-owner")) {
                         SkullMeta skullMeta = (SkullMeta) meta;
-                        String ownerName = Objects.requireNonNull(section.getString("skull-owner")).replace("{player}", Objects.requireNonNull(target.getName()));
+                        String ownerName = section.getString("skull-owner").replace("{player}", target.getName());
                         skullMeta.setOwningPlayer(Bukkit.getOfflinePlayer(ownerName));
                     }
 

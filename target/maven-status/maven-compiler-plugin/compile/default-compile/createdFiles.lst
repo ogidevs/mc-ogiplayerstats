@@ -1,8 +1,11 @@
 org\ognjen\ogiPlayerStats\commands\StatsCommand.class
-org\ognjen\ogiPlayerStats\listeners\GuiListener.class
 org\ognjen\ogiPlayerStats\OgiPlayerStats.class
+org\ognjen\ogiPlayerStats\utils\DebugLogger.class
 org\ognjen\ogiPlayerStats\commands\StatsTabCompleter.class
-org\ognjen\ogiPlayerStats\inventory\StatsGuiHolder.class
 org\ognjen\ogiPlayerStats\papi\StatsExpansion.class
+org\ognjen\ogiPlayerStats\utils\VersionChecker.class
+org\ognjen\ogiPlayerStats\listeners\GuiListener.class
+org\ognjen\ogiPlayerStats\inventory\StatsGuiHolder.class
+org\ognjen\ogiPlayerStats\listeners\JoinListener.class
 org\ognjen\ogiPlayerStats\inventory\GuiManager.class
 org\ognjen\ogiPlayerStats\utils\StatHelper.class
