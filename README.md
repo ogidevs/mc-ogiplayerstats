@@ -15,7 +15,7 @@
   <!-- GitHub Badges -->
   <a href="#"><img src="https://img.shields.io/static/v1?label=Minecraft&message=1.16.5%20-%201.21&color=brightgreen" alt="Supported Versions"></a>
   <a href="https://github.com/ogidevs/mc-ogiplayerstats/issues"><img src="https://img.shields.io/github/issues/ogidevs/mc-ogiplayerstats" alt="GitHub issues"></a>
-  <a href="https://github.com/ogidevs/mc-ogiplayerstats/blob/main/LICENSE"><img src="https://img.shields.io/github/license/ogidevs/mc-ogiplayerstats" alt="License"></a>
+  <a href="https://github.com/ogidevs/mc-ogiplayerstats/blob/main/LICENSE"><img src="https://img.shields.io/github/license/ogidevs/mc-ogiplayerstats?cacheSeconds=1" alt="License"></a>
 </p>
 
 ---

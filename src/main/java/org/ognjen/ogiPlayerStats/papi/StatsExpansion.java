@@ -45,6 +45,7 @@ public class StatsExpansion extends PlaceholderExpansion {
         if (player == null) {
             return "";
         }
+        plugin.getDebugLogger().log("PAPI requested identifier: '" + identifier + "'");
 
         // Combine standard stats and the time stat into one list for checking
 
@@ -69,6 +70,8 @@ public class StatsExpansion extends PlaceholderExpansion {
             String configIdentifier = strippedName.toLowerCase()
                     .replace(" ", "_")
                     .replace("'", "");
+
+            plugin.getDebugLogger().log("Comparing with config-generated identifier: '" + configIdentifier + "'");
 
             if (configIdentifier.equals(identifier)) {
                 long value = StatHelper.getStatValue(player, statConfig);

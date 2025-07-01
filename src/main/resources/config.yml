@@ -94,3 +94,11 @@ displayed-stats:
     # This could be from EssentialsX (%essentials_playtime_formatted%),
     # or another playtime plugin.
     placeholder: "%statistic_time_played%"
+
+# --- Plugin Settings ---
+settings:
+  # If true, enables detailed debug messages in the server console.
+  # Useful for troubleshooting placeholder issues.
+  debug-mode: false
+  # If true, OPs will be notified on login if a new version is available.
+  version-checker: true
