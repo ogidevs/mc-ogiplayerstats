@@ -28,7 +28,6 @@ public class StatHelper {
             Statistic statistic = Statistic.valueOf(statConfig.getString("statistic", "").toUpperCase());
             // Handle block or entity-based stats
             String type = statConfig.getString("type");
-
             if (type != null) {
                 String subType = statConfig.getString("sub-type");
                 if (subType == null) {
@@ -50,7 +49,7 @@ public class StatHelper {
 
         } catch (Exception e) {
             // Log an error if the statistic in the config is invalid
-            OgiPlayerStats.getInstance().getLogger().warning("Invalid statistic configuration for: " + statConfig.getName());
+            OgiPlayerStats.getInstance().getDebugLogger().log("Failed to parse stat: " + e.getMessage());
             return 0;
         }
     }
