@@ -22,11 +22,14 @@ gui-settings:
 
 # --- Displayed Stats ---
 # Each item in this list will be an item in the GUI.
-# You can find Material names here: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
-# You can find Statistic names here: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Statistic.html
+#
+# Find Material names here: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+# Find Statistic names here: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Statistic.html
+# Find EntityType names here: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/EntityType.html
+#
 # Slots are numbered 0-53 (top-left to bottom-right).
 displayed-stats:
-  - slot: 10
+  - slot: 11
     material: "DIAMOND_SWORD"
     name: "&bPlayer Kills"
     lore:
@@ -35,14 +38,18 @@ displayed-stats:
       - "&aValue: &f{value}"
     statistic: "PLAYER_KILLS"
 
-  - slot: 11
-    material: "IRON_SWORD"
-    name: "&bMob Kills"
+  # Here's another example for killing a specific mob.
+  - slot: 12
+    material: "ZOMBIE_HEAD"
+    name: "&bZombies Killed"
     lore:
-      - "&7Total mobs slain."
       - ""
       - "&aValue: &f{value}"
-    statistic: "MOB_KILLS"
+    statistic: "KILL_ENTITY"
+    # The general statistic is "KILL_ENTITY"...
+    type: "ENTITY_TYPE"
+    # ...and the specific entity we want to count is "ZOMBIE".
+    sub-type: "ZOMBIE"
 
   # --- NEW: PAPI Placeholder Example (Vault Economy) ---
   - slot: 13
@@ -56,6 +63,8 @@ displayed-stats:
     # This requires Vault and an economy plugin.
     placeholder: "%vault_eco_balance_formatted%"
 
+  # This is a COMPLEX statistic. The main statistic 'MINE_BLOCK' is a general
+  # category, so we need to specify exactly WHAT we're counting.
   - slot: 14
     material: "DIAMOND_PICKAXE"
     name: "&bDiamonds Mined"
@@ -64,8 +73,13 @@ displayed-stats:
       - ""
       - "&aValue: &f{value}"
     statistic: "MINE_BLOCK"
+    # The 'type' tells the plugin what kind of thing to look for.
+    # Usually "BLOCK" for materials/items, or "ENTITY_TYPE" for mobs/players.
     type: "BLOCK"
+    # The 'sub-type' is the exact name of the block, item, or entity.
+    # In this case, we want to count how many DIAMOND_ORE blocks were mined.
     sub-type: "DIAMOND_ORE"
+
 
   # --- NEW: PAPI Placeholder with a Player Head ---
   - slot: 15
