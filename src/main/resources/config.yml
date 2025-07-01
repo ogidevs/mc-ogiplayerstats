@@ -104,15 +104,17 @@ displayed-stats:
     # or another playtime plugin.
     placeholder: "%statistic_time_played%"
 
-  - slot: 22 # Centerpiece PvP Stat
-    material: "WRITABLE_BOOK"
-    name: "&6Kill/Death Ratio (KDR)"
+  - slot: 22
+    material: "DRAGON_HEAD"
+    name: "&5Ender Dragon Kills"
     lore:
-      - "&7The ultimate PvP metric."
+      - "&7How many times you've conquered"
+      - "&7the Ender Dragon."
       - ""
-      - "&eRatio: &f{value}"
-    # This advanced placeholder calculates KDR on the fly!
-    placeholder: ""
+      - "&eKills: &f{value}"
+    statistic: "KILL_ENTITY"
+    type: "ENTITY_TYPE"
+    sub-type: "ENDER_DRAGON"
 
 # --- Plugin Settings ---
 settings:

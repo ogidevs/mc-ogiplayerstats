@@ -28,14 +28,20 @@ public class StatHelper {
             Statistic statistic = Statistic.valueOf(statConfig.getString("statistic", "").toUpperCase());
             // Handle block or entity-based stats
             String type = statConfig.getString("type");
+
             if (type != null) {
                 String subType = statConfig.getString("sub-type");
-                if (subType == null) return 0;
+                if (subType == null) {
+                    OgiPlayerStats.getInstance().getLogger().warning("Stat '" + statConfig.getString("name") + "' is missing a 'sub-type'!");
+                    return 0;
+                }
 
-                if (type.equalsIgnoreCase("BLOCK")) {
-                    return player.getStatistic(statistic, Material.valueOf(subType.toUpperCase()));
-                } else if (type.equalsIgnoreCase("ENTITY_TYPE")) {
+                if (type.equalsIgnoreCase("ENTITY_TYPE")) {
+                    // Handle entity-based stats like KILL_ENTITY
                     return player.getStatistic(statistic, EntityType.valueOf(subType.toUpperCase()));
+                } else if (type.equalsIgnoreCase("BLOCK") || type.equalsIgnoreCase("ITEM")) {
+                    // Handle both BLOCK and ITEM stats, which both use the Material enum
+                    return player.getStatistic(statistic, Material.valueOf(subType.toUpperCase()));
                 }
             }
 
