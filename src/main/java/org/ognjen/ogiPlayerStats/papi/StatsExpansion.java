@@ -59,9 +59,16 @@ public class StatsExpansion extends PlaceholderExpansion {
             String statName = statConfig.getString("name");
             if (statName == null) continue;
 
+
             // Create a placeholder-friendly identifier from the stat name in the config
-            // e.g., "&bPlayer Kills" -> "player_kills"
-            String configIdentifier = ChatColor.stripColor(statName).toLowerCase().replace(" ", "_");
+            // e.g., "&bPlayer Kills" -> "player_kills
+            String nameWithoutPlaceholders = statName.replace("{player}", "");
+
+            String strippedName = nameWithoutPlaceholders.replaceAll("(?i)&[0-9A-FK-OR]", "");
+
+            String configIdentifier = strippedName.toLowerCase()
+                    .replace(" ", "_")
+                    .replace("'", "");
 
             if (configIdentifier.equals(identifier)) {
                 long value = StatHelper.getStatValue(player, statConfig);

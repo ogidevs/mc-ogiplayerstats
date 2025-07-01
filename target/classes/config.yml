@@ -93,4 +93,4 @@ displayed-stats:
       - "&ePlaytime: &f{value}"
     # This could be from EssentialsX (%essentials_playtime_formatted%),
     # or another playtime plugin.
-    placeholder: "%player_time_formatted%"
+    placeholder: "%statistic_time_played%"
